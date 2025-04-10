@@ -861,33 +861,30 @@ void vmx_handle_cpuid(vmx::guest_context& guest_context)
 	// Fake CPUID
 	// TODO: Make it configurable
 	switch (guest_context.vp_regs->Rax) {
-	// Processor Info and Feature Bits
-	case 1:
+	case CPUID_VERSION_INFORMATION:
 		cpu_info[0] = 0x100fa200; // rax
 		cpu_info[1] = 0x0008100c; // rbx
 		cpu_info[2] = 0x0b32d8fe; // rcx
 		cpu_info[3] = 0xfffb8b17; // rdx
-	// Extended Processor Info
-	case 0x80000001:
+	case CPUID_EXTENDED_CPU_SIGNATURE:
 		cpu_info[0] = 0x100fa200; 
 		cpu_info[1] = 0x00000020;
 		cpu_info[2] = 0xf323c020;
 		cpu_info[3] = 0xfffbd32f;
 		break;
-	// Processor Brand String
-	case 0x80000002:
+	case CPUID_BRAND_STRING1:
 		cpu_info[0] = 0x414d4420;
 		cpu_info[1] = 0x52797a65;
 		cpu_info[2] = 0x6e203720;
 		cpu_info[3] = 0x35383030;
 		break;
-	case 0x80000003:
+	case CPUID_BRAND_STRING2:
 		cpu_info[0] = 0x5820382d;
 		cpu_info[1] = 0x436f7265;
 		cpu_info[2] = 0x2050726f;
 		cpu_info[3] = 0x63657373;
 		break;
-	case 0x80000004:
+	case CPUID_BRAND_STRING3:
 		cpu_info[0] = 0x6f722020;
 		cpu_info[1] = 0x20202020;
 		cpu_info[2] = 0x20202020;
